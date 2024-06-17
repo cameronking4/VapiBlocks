@@ -29,4 +29,4 @@ Dependencies:
 
 ## Credits
 
-Vapi Blocks is inspired by other libraries like **ShadCN** and **MagicUI** so I want to give them credit for their work and inspiration, also I want to thank the **TailwindCSS** team for their amazing work.
+Vapi Blocks is inspired by other libraries like **ShadCN** and **MagicUI** so I want to give them credit for their work and inspiration, also I want to thank the **TailwindCSS** team for their amazing work. The UI for the site was made possible by @chonza!
