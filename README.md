@@ -1,6 +1,7 @@
 # Vapi Blocks - React components library
 
-![chonza preview](./public/images/hero-img.png)
+![image](https://github.com/cameronking4/VapiBlocks/assets/35708477/fa06bd54-c3c5-4e3e-bec4-8cd7b2d25354)
+
 
 ## Introduction
 
