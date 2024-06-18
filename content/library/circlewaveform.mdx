@@ -46,7 +46,6 @@ const RadialCard: React.FC = () => {
   };
 
   return (
-    <ShineCard>
       <div className='border text-center justify-items-center p-4 rounded-2xl'>
         <div className="flex items-center justify-center h-full relative" style={{ width: '300px', height: '300px' }}>
           { isSessionActive ? 
@@ -92,20 +91,8 @@ const RadialCard: React.FC = () => {
           <span className="absolute top-48 w-[calc(100%-70%)] h-[calc(100%-70%)] bg-primary blur-[120px]"></span>
         </div>
       </div>
-    </ShineCard>
   );
 };
-
-export function ShineCard({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="group relative size-80 overflow-hidden flex flex-col items-center gap-2 justify-center border rounded-[1rem] p-2">
-      {children}
-      <div className="absolute inset-0 flex w-full h-full justify-center items-center z-10 [transform:translateX(-130%)_skew(25deg)] duration-1000 group-hover:duration-1000 group-hover:[transform:translateX(130%)_skew(15deg)]">
-        <div className="w-20 h-full bg-primary/40 blur-[80px]"></div>
-      </div>
-    </div>
-  );
-}
 
 export default RadialCard;
 

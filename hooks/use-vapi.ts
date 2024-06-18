@@ -2,8 +2,9 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Vapi from '@vapi-ai/web';
 
-const publicKey = '9277e914-73a3-4ccc-9a9c-8f4e20a86ecf'; // Replace with your actual public key
-const assistantId = '984c75a8-2b0e-433c-8308-9b061556ce17'; // Replace with your actual assistant ID
+
+const publicKey = process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY || ""; // Replace with your actual public key
+const assistantId = process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID || ""; // Replace with your actual assistant ID
 
 const useVapi = () => {
   const [volumeLevel, setVolumeLevel] = useState(0);

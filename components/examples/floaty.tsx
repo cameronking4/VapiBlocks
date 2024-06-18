@@ -15,7 +15,7 @@ const FloatingCircle = ({ isActive, volumeLevel, handleClick }: { isActive: bool
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-5 right-5 z-50">
       <div className="relative flex items-center justify-center w-16 h-16">
         {isActive && volumeLevel > 0 && (
           <>

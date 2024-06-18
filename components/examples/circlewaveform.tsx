@@ -25,7 +25,7 @@ const CircleWaveform: React.FC = () => {
   };
 
   return (
-    <ShineCard>
+    <>
       <div className='border text-center justify-items-center p-4 rounded-2xl'>
         <div className="flex items-center justify-center h-full relative" style={{ width: '300px', height: '300px' }}>
           { isSessionActive ? 
@@ -68,10 +68,10 @@ const CircleWaveform: React.FC = () => {
               );
             })}
           </svg>
-          <span className="absolute top-48 w-[calc(100%-70%)] h-[calc(100%-70%)] bg-primary blur-[120px]"></span>
+          <span className="absolute top-48 w-[calc(100%-70%)] h-[calc(100%-70%)] bg-primary-foreground dark:bg-primary blur-[120px]"></span>
         </div>
       </div>
-    </ShineCard>
+    </>
   );
 };
 

@@ -63,14 +63,14 @@ export const siteConfig = {
     },
     {
       title: "Transcriber",
-      path: "/components/hero",
+      path: "/components/transcribe",
       new: false,
     },
   ],
   sections: [
     {
       title: "Outbound Call",
-      path: "/components/hero",
+      path: "/components/outbound-phone-dial",
       new: true,
     }
   ],

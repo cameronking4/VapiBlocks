@@ -37,7 +37,7 @@ const Orb: React.FC = () => {
     console.log("Initializing Three.js visualization...");
     const scene = new THREE.Scene();
     const group = new THREE.Group();
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.5, 100);
+    const camera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 0.5, 100);
     camera.position.set(0, 0, 100);
     camera.lookAt(scene.position);
 
@@ -47,7 +47,7 @@ const Orb: React.FC = () => {
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth/2, window.innerHeight/2); // Edit canvas size here
     rendererRef.current = renderer;
 
     const icosahedronGeometry = new THREE.IcosahedronGeometry(10, 8);

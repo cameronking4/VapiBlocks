@@ -1,6 +1,8 @@
 import { build } from "velite";
 
 /** @type {import('next').NextConfig} */
+require('dotenv').config();
+
 export default {
   // othor next config here...
   webpack: (config) => {
