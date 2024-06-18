@@ -1,7 +1,9 @@
 import { build } from "velite";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 /** @type {import('next').NextConfig} */
-require('dotenv').config();
 
 export default {
   // othor next config here...

@@ -12,9 +12,9 @@ import { Badge } from "./ui/badge";
 
 export function Header() {
   const pathname = usePathname();
-  const newComponent =
-    siteConfig.components.find((component) => component.new) ||
-    siteConfig.components[0];
+  // const newComponent =
+  //   siteConfig.components.find((component) => component.new) ||
+  //   siteConfig.components[0];
   return (
     <header className="sticky top-0 z-50 border-b bg-background">
       <div className="max-md:px-4 md:container h-12 flex justify-center items-center">
@@ -29,7 +29,8 @@ export function Header() {
             </Badge>
           </Link>
           <div className="flex gap-10 items-center">
-            <Link href={newComponent.path}>
+            {/* <Link href={newComponent.path}> */}
+            <Link href="/docs/changelog" >
               <Button
                 variant="link"
                 size="sm"

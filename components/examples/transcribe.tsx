@@ -6,10 +6,10 @@ function Hero() {
   const { toggleCall, isSessionActive, volumeLevel, conversation } = useVapi();
 
   return (
-    <section className="relative w-full mx-auto flex flex-col justify-center items-center gap-8 bg-[#0D0D0C] py-24">
+    <section className="relative w-full mx-auto flex flex-col justify-center items-center gap-8">
       <div className="flex flex-col gap-5 text-center animate-hero-in">
-        <span className="text-4xl max-w-3xl font-medium tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none text-transparent bg-clip-text bg-gradient-to-b from-white to-purple-100">
-          Drop-in Voice AI into your web apps!
+        <span className="text-4xl mt-8 max-w-3xl font-medium tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none bg-clip-text">
+          Drop Voice AI blocks into your web apps!
         </span>
         <a
           // href="https://github.com/cameronking4/VapiBlocks"
@@ -19,15 +19,15 @@ function Hero() {
         >
           <button
             onClick={toggleCall}
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-white/70 text-black shadow hover:bg-white/30 hover:text-white h-9 px-4 py-2"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-secondary shadow hover:bg-indigo/30 hover:text-indigo h-9 px-4 py-2"
           >
             {isSessionActive ? "Stop Call" : "Start Call"}
           </button>
         </a>
       </div>
-      <div className="relative flex justify-center items-center aspect-video w-full p-2 overflow-hidden">
+      <div className="relative flex justify-center items-center aspect-video w-full p-2">
         {/* <span className="absolute top-48 w-[calc(100%-70%)] h-[calc(100%-70%)] bg-purple-700 blur-[120px]"></span> */}
-        <div className="size-full px-12 mx-auto shadow-xl">
+        <div className="size-full mx-auto">
           <Transcriber conversation={conversation} />
         </div>
       </div>
