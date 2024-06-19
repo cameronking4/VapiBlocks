@@ -54,7 +54,7 @@ export const siteConfig = {
     {
       title: "Radial",
       path: "/components/circlewaveform",
-      new: true,
+      new: false,
     },
     {
       title: "Siri",
@@ -69,7 +69,7 @@ export const siteConfig = {
     {
       title: "Transcriber",
       path: "/components/transcribe",
-      new: false,
+      new: true,
     },
   ],
   sections: [

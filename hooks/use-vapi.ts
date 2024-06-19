@@ -1,10 +1,16 @@
-// /hooks/use-vapi.ts
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Vapi from '@vapi-ai/web';
 
-
 const publicKey = process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY || ""; // Replace with your actual public key
 const assistantId = process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID || ""; // Replace with your actual assistant ID
+
+const routes: { [key: string]: string } = {
+  "visualizer": "/components/visualizer",
+  "orb": "/components/orb",
+  "radial": "/components/radial",
+  "siri": "/components/siri"
+};
+
 
 const useVapi = () => {
   const [volumeLevel, setVolumeLevel] = useState(0);
@@ -78,6 +84,17 @@ const useVapi = () => {
             }
             return updatedConversation;
           });
+        }
+
+        if (message.type === 'function-call' && message.functionCall.name === 'changeUrl') {
+          const command = message.functionCall.parameters.url.toLowerCase();
+          console.log(command);
+          // const newUrl = routes[command];
+          if (command) {
+            window.location.href = command;
+          } else {
+            console.error('Unknown route:', command);
+          }
         }
       });
 
