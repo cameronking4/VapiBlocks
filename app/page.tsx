@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 import { Shine } from "@/components/examples/shine";
+import Orb from "@/components/examples/3d-orb";
 import Logos from "@/components/logos";
+import { ArrowRightIcon } from "lucide-react";
 
 export default async function Home() {
   const getRepoStarts = async () => {
@@ -16,19 +18,41 @@ export default async function Home() {
   };
   const stars = await getRepoStarts();
   return (
-    <div className="flex flex-col gap-10 container justify-center items-center">
+    <div className="flex flex-col gap-4 container justify-center items-center">
       <Shine>
-        <section className="w-full h-full max-w-3xl container px-4 py-16">
+        <section className="w-full h-full max-w-3xl container px-4 pt-24">
           <div className="flex flex-col justify-center space-y-4 text-center">
             <div className="space-y-12">
               <span className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/50">
-                Blocks to add Voice AI into your Next.js apps 10x faster
+               Instantly add Voice AI into your Next.js apps
               </span>
               <p className="w-full mt-4 px-10 md:text-xl lg:text-lg xl:text-xl text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/50">
-                Open source TailwindCSS components & serverless functions to drop-in Voice AI into your web app - Shadcn & Vapi had a baby.
+                Open source pre-built components & serverless functions to drop-in Voice AI into your web app - Shadcn & Vapi had a baby.
               </p>
             </div>
-            <div className="flex gap-2 justify-center">
+            <div className="flex justify-center">
+              <a
+                href="/docs/changelog"
+                className="no-underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  variant="outline"
+                  className="flex items-center gap-2 group"
+                >
+                  View Components <ArrowRightIcon/>
+                </Button>
+              </a>
+            </div>
+            <div className="w-full">
+            <Orb />
+            </div>
+          </div>
+        </section>
+      </Shine>
+      <Logos />
+      <div className="flex justify-center mb-8">
               <a
                 href="https://github.com/cameronking4/VapiBlocks"
                 className="no-underline"
@@ -46,10 +70,7 @@ export default async function Home() {
                 </Button>
               </a>
             </div>
-          </div>
-        </section>
-      </Shine>
-      <Logos />
+            <hr/>
     </div>
   );
 }

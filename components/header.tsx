@@ -57,7 +57,7 @@ export function Header() {
           </div>
         </nav>
         <div className="flex gap-3 items-center justify-end">
-          <Link
+          {/* <Link
             href={"#"}
             target="_blank"
             rel="noreferrer noopener"
@@ -71,7 +71,7 @@ export function Header() {
             >
               <span className="hidden md:block">Give Feedback</span>
             </Button>
-          </Link>
+          </Link> */}
           <Link
             href={siteConfig.links.github}
             target="_blank"

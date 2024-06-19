@@ -15,7 +15,6 @@ const Orb: React.FC = () => {
   const noise = createNoise3D();
 
   useEffect(() => {
-    console.log("Initializing visualization...");
     initViz();
     window.addEventListener('resize', onWindowResize);
     return () => {
@@ -25,19 +24,16 @@ const Orb: React.FC = () => {
 
   useEffect(() => {
     if (isSessionActive && ballRef.current) {
-      console.log("Session is active, morphing the ball");
       updateBallMorph(ballRef.current, volumeLevel);
     } else if (!isSessionActive && ballRef.current && originalPositionsRef.current) {
-      console.log("Session ended, resetting the ball");
       resetBallMorph(ballRef.current, originalPositionsRef.current);
     }
   }, [volumeLevel, isSessionActive]);
 
   const initViz = () => {
-    console.log("Initializing Three.js visualization...");
     const scene = new THREE.Scene();
     const group = new THREE.Group();
-    const camera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 0.5, 100);
+    const camera = new THREE.PerspectiveCamera(15, 1, 0.1, 1000); // Aspect ratio 1 for square
     camera.position.set(0, 0, 100);
     camera.lookAt(scene.position);
 
@@ -47,7 +43,6 @@ const Orb: React.FC = () => {
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth/2, window.innerHeight/2); // Edit canvas size here
     rendererRef.current = renderer;
 
     const icosahedronGeometry = new THREE.IcosahedronGeometry(10, 8);
@@ -81,7 +76,7 @@ const Orb: React.FC = () => {
     if (outElement) {
       outElement.innerHTML = ''; // Clear any existing renderer
       outElement.appendChild(renderer.domElement);
-      renderer.setSize(outElement.clientWidth, outElement.clientHeight);
+      renderer.setSize(outElement.clientWidth, outElement.clientWidth); // Square canvas
     }
 
     render();
@@ -94,7 +89,9 @@ const Orb: React.FC = () => {
 
     groupRef.current.rotation.y += 0.005;
     rendererRef.current.render(sceneRef.current, cameraRef.current);
-    requestAnimationFrame(render);
+    setTimeout(() => {
+      requestAnimationFrame(render);
+    }, 1000 / 30); // Limiting to 30 FPS
   };
 
   const onWindowResize = () => {
@@ -102,14 +99,13 @@ const Orb: React.FC = () => {
 
     const outElement = document.getElementById('out');
     if (outElement) {
-      cameraRef.current.aspect = outElement.clientWidth / outElement.clientHeight;
+      cameraRef.current.aspect = 1; // Maintain square aspect ratio
       cameraRef.current.updateProjectionMatrix();
-      rendererRef.current.setSize(outElement.clientWidth, outElement.clientHeight);
+      rendererRef.current.setSize(outElement.clientWidth, outElement.clientWidth); // Square canvas
     }
   };
 
   const updateBallMorph = (mesh: THREE.Mesh, volume: number) => {
-    console.log("Morphing the ball with volume:", volume);
     const geometry = mesh.geometry as THREE.BufferGeometry;
     const positionAttribute = geometry.getAttribute('position');
 
@@ -120,7 +116,7 @@ const Orb: React.FC = () => {
         positionAttribute.getZ(i)
       );
 
-      const offset = 10; // Radius of the icosahedron
+      const offset = 8; // Radius of the icosahedron
       const amp = 2.5; // Dramatic effect
       const time = window.performance.now();
       vertex.normalize();
@@ -139,7 +135,6 @@ const Orb: React.FC = () => {
   };
 
   const resetBallMorph = (mesh: THREE.Mesh, originalPositions: Float32Array) => {
-    console.log("Resetting the ball to its original shape");
     const geometry = mesh.geometry as THREE.BufferGeometry;
     const positionAttribute = geometry.getAttribute('position');
 
@@ -157,7 +152,7 @@ const Orb: React.FC = () => {
   };
 
   return (
-    <div style={{ height: '100%' }}>
+    <div className='h-fit'>
       <div id="out" className="hover:cursor-pointer" onClick={toggleCall} style={{ height: '100%', width: '100%' }}></div>
     </div>
   );

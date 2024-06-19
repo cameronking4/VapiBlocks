@@ -21,7 +21,7 @@ export default function Logos() {
 
   return (
     <section
-      className="w-full max-w-3xl overflow-hidden select-none flex flex-col justify-center gap-10 text-center font-medium text-muted-foreground animate-hero-in"
+      className="w-full max-w-3xl overflow-hidden select-none flex flex-col justify-center text-center font-medium text-muted-foreground animate-hero-in mb-2"
       style={{
         WebkitMask:
           "linear-gradient(90deg, transparent, black 20%, black 80%, transparent)",
@@ -31,7 +31,7 @@ export default function Logos() {
       <span className="w-full px-10 md:text-xl lg:text-lg xl:text-xl text-muted-foreground">
         Built with
       </span>
-      <div className="w-full h-fit max-w-3xl flex flex-col justify-center select-none overflow-hidden">
+      <div className="w-full h-fit mt-4 max-w-3xl flex flex-col justify-center select-none overflow-hidden">
         <div className="w-max flex flex-nowrap gap-[4rem] animate-slide-logos">
           {dobleLogos.map((logo, index) => (
             <img
