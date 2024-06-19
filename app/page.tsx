@@ -27,7 +27,7 @@ export default async function Home() {
                Instantly add Voice AI into your Next.js apps
               </span>
               <p className="w-full mt-4 px-10 md:text-xl lg:text-lg xl:text-xl text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/50">
-                Open source pre-built components & serverless functions to drop-in Voice AI into your web app - Shadcn & Vapi had a baby.
+                Open source pre-built components & serverless functions to drop-in Voice AI into your web app - {"it's"} like if Shadcn & Vapi had a baby.
               </p>
             </div>
             <div className="flex justify-center">
