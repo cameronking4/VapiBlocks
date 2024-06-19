@@ -1,75 +1,3 @@
----
-title: Make Vapi Phone Call
-description: Hero component.
-date: 2024-05-18
-published: true
----
-
-# Outbound Phone Dial
-
-A component to call a phone number using a dedicated AI assistant, crafted with React and Tailwind CSS.
-
-## Preview
-
-<ComponentPreview name="outbound-dial" />
-
-## Configuration
-
-To make functional, drop this serverless function into your app. This function will use default Vapi endpoint to make phone call.
-
-<CodeBlockWrapper size="full">
-```ts {7} {24-28} {33}
-// app/api/vapi/make-call/route.ts
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import axios from 'axios';
-
-export async function POST(request: NextRequest) {
-  const API_KEY = process.env.VAPI_API_KEY;
-
-  if (!API_KEY) {
-    return NextResponse.json({ message: 'API key not found' }, { status: 500 });
-  }
-
-  const { phoneNumberId, assistantId, customerNumber } = await request.json();
-
-  if (!phoneNumberId || !assistantId || !customerNumber) {
-    return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
-  }
-
-  const headers = {
-    Authorization: `Bearer ${API_KEY}`,
-    'Content-Type': 'application/json',
-  };
-
-  const data = {
-    phoneNumberId: phoneNumberId,
-    assistantId: assistantId,
-    customer: {
-      number: customerNumber,
-    },
-  };
-
-  try {
-    const response = await axios.post('https://api.vapi.ai/call/phone', data, { headers });
-    if (response.status === 201) {
-      return NextResponse.json({ message: 'Call created successfully', data: response.data });
-    } else {
-      return NextResponse.json({ message: 'Failed to create call', error: response.data }, { status: response.status });
-    }
-  } catch (error) {
-    return NextResponse.json({ message: 'Internal Server Error', error: JSON.stringify(error, null, 2) }, { status: 500 });
-  }
-}
-```
-</CodeBlockWrapper>
-
-## Component
-
-Copy and paste the following code into your component, example **_outbound-dial.tsx_**.
-
-<CodeBlockWrapper size="wrapper">
-```tsx
 "use client";
 
 import { CheckIcon, ChevronsUpDown } from "lucide-react";
@@ -270,7 +198,7 @@ export default function PhoneInputForm() {
     <>
       <Toaster position="bottom-right" />
       <form onSubmit={handleSubmit} className="mx-auto px-2 items-center">
-        <p className="mb-2">Enter your phone number to get called by Vapi Blocks.</p>
+        <p className="mb-2">Receive phone call from Vapi Blocks.</p>
         <div className="flex items-center space-x-2 mb-2">
           <CustomPhoneInput
             className="w-full"
@@ -288,24 +216,3 @@ export default function PhoneInputForm() {
     </>
   );
 }
-
-```
-</CodeBlockWrapper>
-
-## Usage
-
-Import the component in your file.
-
-<CodeBlockWrapper size="full">
-```tsx {1,6}
-import PhoneInputForm from "@/components/vapi/outbound-dial";
-
-export default function Home() {
-  return (
-    <main className="w-full min-h-screen">
-      <PhoneInputForm />
-    </main>
-  );
-}
-```
-</CodeBlockWrapper>

@@ -128,6 +128,9 @@ importers:
       framer-motion:
         specifier: ^11.2.10
         version: 11.2.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      gsap:
+        specifier: ^3.12.5
+        version: 3.12.5
       input-otp:
         specifier: ^1.2.4
         version: 1.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -155,6 +158,9 @@ importers:
       react-hook-form:
         specifier: ^7.52.0
         version: 7.52.0(react@18.3.1)
+      react-phone-number-input:
+        specifier: ^3.4.3
+        version: 3.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-resizable-panels:
         specifier: ^2.0.16
         version: 2.0.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1620,6 +1626,9 @@ packages:
   class-variance-authority@0.7.0:
     resolution: {integrity: sha512-jFI8IQw4hczaL4ALINxqLEXQbWcNjoSkloa4IaufXCJr6QawJyw7tuRysRsrE8w2p/4gGaxKIt/hX3qz/IbD1A==}
 
+  classnames@2.5.1:
+    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
+
   client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
 
@@ -1670,6 +1679,9 @@ packages:
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+
+  country-flag-icons@1.5.12:
+    resolution: {integrity: sha512-ksBaQqQEFSvSFg1NV8tlAk4IjgDRNMu5ImjnCac0C409CiN6ObTI0vCFaNfaPusxLrr5O9pueT1R3G4XMMwErg==}
 
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -2129,6 +2141,9 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
+  gsap@3.12.5:
+    resolution: {integrity: sha512-srBfnk4n+Oe/ZnMIOXt3gT605BX9x5+rh/prT2F1SsNJsU1XuMiP0E2aptW481OnonOGACZWBqseH5Z7csHxhQ==}
+
   has-bigints@1.0.2:
     resolution: {integrity: sha512-tSvCKtBr9lkF0Ex0aQiP9N+OpV4zi2r/Nee5VkRDbaqv35RLYMzbwQfFSZZH0kR+Rd6302UJZ2p/bJCEoR3VoQ==}
 
@@ -2212,6 +2227,9 @@ packages:
 
   inline-style-parser@0.2.3:
     resolution: {integrity: sha512-qlD8YNDqyTKTyuITrDOffsl6Tdhv+UC4hcdAVuQsK4IMQ99nSgd1MIA/Q+jQYoh9r3hVUXhYh7urSRmXPkW04g==}
+
+  input-format@0.3.10:
+    resolution: {integrity: sha512-5cFv/kOZD7Ch0viprVkuYPDkAU7HBZYBx8QrIpQ6yXUWbAQ0+RQ8IIojDJOf/RO6FDJLL099HDSK2KoVZ2zevg==}
 
   input-otp@1.2.4:
     resolution: {integrity: sha512-md6rhmD+zmMnUh5crQNSQxq3keBRYvE3odbr4Qb9g2NWzQv9azi+t1a3X4TBTbh98fsGHgEEJlzbe1q860uGCA==}
@@ -2414,6 +2432,9 @@ packages:
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
+
+  libphonenumber-js@1.11.3:
+    resolution: {integrity: sha512-RU0CTsLCu2v6VEzdP+W6UU2n5+jEpMDRkGxUeBgsAJgre3vKgm17eApISH9OQY4G0jZYJVIc8qXmz6CJFueAFg==}
 
   lie@3.1.1:
     resolution: {integrity: sha512-RiNhHysUjhrDQntfYSfY4MU24coXXdEOgw9WGcKHNeEwffDYbF//u87M1EWaMGzuFoSbqW0C9C6lEEhDOAswfw==}
@@ -2868,6 +2889,12 @@ packages:
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  react-phone-number-input@3.4.3:
+    resolution: {integrity: sha512-n0dD9V1T8EWeRoGwVMcNK6bwOdEbIk0U3EQ87K0WTADgyJZUJd9NIQMmpcl9mtWSL+LwPaEMzre0yGkhwZYTzg==}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
 
   react-remove-scroll-bar@2.3.6:
     resolution: {integrity: sha512-DtSYaao4mBmX+HDo5YWYdBWQwYIQQshUV/dVxFxK+KM26Wjwp1gZ6rv6OC3oujI6Bfu6Xyg3TwK533AQutsn/g==}
@@ -4845,6 +4872,8 @@ snapshots:
     dependencies:
       clsx: 2.0.0
 
+  classnames@2.5.1: {}
+
   client-only@0.0.1: {}
 
   clsx@2.0.0: {}
@@ -4890,6 +4919,8 @@ snapshots:
   commander@4.1.1: {}
 
   concat-map@0.0.1: {}
+
+  country-flag-icons@1.5.12: {}
 
   cross-spawn@7.0.3:
     dependencies:
@@ -5519,6 +5550,8 @@ snapshots:
 
   graphemer@1.4.0: {}
 
+  gsap@3.12.5: {}
+
   has-bigints@1.0.2: {}
 
   has-flag@4.0.0: {}
@@ -5649,6 +5682,10 @@ snapshots:
   inline-style-parser@0.1.1: {}
 
   inline-style-parser@0.2.3: {}
+
+  input-format@0.3.10:
+    dependencies:
+      prop-types: 15.8.1
 
   input-otp@1.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
@@ -5845,6 +5882,8 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
       type-check: 0.4.0
+
+  libphonenumber-js@1.11.3: {}
 
   lie@3.1.1:
     dependencies:
@@ -6474,6 +6513,16 @@ snapshots:
       react: 18.3.1
 
   react-is@16.13.1: {}
+
+  react-phone-number-input@3.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      classnames: 2.5.1
+      country-flag-icons: 1.5.12
+      input-format: 0.3.10
+      libphonenumber-js: 1.11.3
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   react-remove-scroll-bar@2.3.6(@types/react@18.3.3)(react@18.3.1):
     dependencies:

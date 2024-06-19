@@ -47,6 +47,11 @@ export const siteConfig = {
       new: true,
     },
     {
+      title: "Glob",
+      path: "/components/glob",
+      new: true,
+    },
+    {
       title: "Radial",
       path: "/components/circlewaveform",
       new: true,
