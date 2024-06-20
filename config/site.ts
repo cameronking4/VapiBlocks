@@ -19,11 +19,11 @@ export const siteConfig = {
     //   path: "/docs/creating-a-new-project",
     //   new: false,
     // },
-    {
-      title: "Changelog",
-      path: "/docs/changelog",
-      new: false,
-    },
+    // {
+    //   title: "Changelog",
+    //   path: "/docs/changelog",
+    //   new: false,
+    // },
   ],
   components: [
     {

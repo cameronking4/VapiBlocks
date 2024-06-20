@@ -63,10 +63,11 @@ function HeroLanding() {
           <span className="text-gradient_indigo-purple font-extrabold">
             Voice AI {""}
           </span> 
-          into your{" "}
+          into your Web Apps with
+          {/* {" "}
           <span className="text-gradient_indigo-purple font-extrabold">
             Web Apps{" "}
-          </span>with{" "}
+          </span>with{" "} */}
           <SparklesText text={"pre-built UI Components"}/>
         </h1>
         <div
@@ -74,7 +75,7 @@ function HeroLanding() {
           style={{ animationDelay: "0.4s", animationFillMode: "forwards" }}
         >
           <Link
-            href="https://form.typeform.com/to/Y0fnn9ll"
+            href="/docs/changelog"
             prefetch={true}
             className={cn(buttonVariants({ size: "lg"}), "gap-2")}
           >
