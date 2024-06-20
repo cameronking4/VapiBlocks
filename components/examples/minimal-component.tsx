@@ -1,18 +1,26 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+
+import React, { useState, useEffect, useRef } from 'react';
 import { MicOff, Mic } from 'lucide-react';
-import useVapi from '@/hooks/use-vapi';
+import { motion, AnimatePresence } from 'framer-motion';
+import useVapi from '@/hooks/use-vapi'; // Adjust the import path as needed
 
-interface AudioVisualizerProps {
-  audioData: Uint8Array;
-}
-
-const AudioVisualizer: React.FC<AudioVisualizerProps> = ({ audioData }) => {
+const AudioVisualizer: React.FC<{ audioData: Uint8Array; isSessionActive: boolean }> = ({ audioData, isSessionActive }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    draw();
-  }, [audioData]);
+    if (isSessionActive) {
+      const canvas = canvasRef.current;
+      const context = canvas?.getContext('2d');
+
+      if (canvas && context) {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+
+      draw();
+    }
+  }, [audioData, isSessionActive]);
 
   const draw = () => {
     const canvas = canvasRef.current;
@@ -24,50 +32,59 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({ audioData }) => {
     const { width, height } = canvas;
     context.clearRect(0, 0, width, height);
 
-    const sliceWidth = (width * 4.44) / (audioData.length - 1);
+    const sliceWidth = (width / (audioData.length - 1)) * 2;
     const centerY = height / 2;
-    const maxAmplitude = height / 3;
 
-    context.lineWidth = 2.7;
+    context.lineWidth = 2;
     context.strokeStyle = '#9E9E9E';
     context.beginPath();
-    context.moveTo(0, centerY);
 
-    for (let i = 1; i < audioData.length; i++) {
-      const v = audioData[i] / 255.0;
-      const y = centerY + (v - 0.5) * maxAmplitude;
+    let prevX = 0;
+    let prevY = centerY;
+
+    context.moveTo(prevX, prevY);
+
+    for (let i = 0; i < audioData.length; i++) {
+      const avgValue = (audioData[i] + audioData[Math.max(0, i - 1)]) / 2; // Averaging current and previous data points
+      const v = avgValue / 255.0;
+      const y = centerY + (v - 0.5) * height;
       const x = i * sliceWidth;
 
-      const cp1x = x - sliceWidth / 2;
-      const cp1y = centerY;
-      const cp2x = x - sliceWidth / 2;
-      const cp2y = y;
+      context.bezierCurveTo((prevX + x) / 2, prevY, (prevX + x) / 2, y, x, y);
 
-      context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+      prevX = x;
+      prevY = y;
     }
 
     context.stroke();
   };
 
-  return <canvas ref={canvasRef} className="w-full h-full" />;
+  return (
+    <motion.canvas
+      ref={canvasRef}
+      className="w-full h-full"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isSessionActive ? 1 : 0 }}
+      transition={{ duration: 0.5 }}
+    />
+  );
 };
 
-interface AudioAnalyzerProps {
-  volumeLevel: number;
-}
-
-const AudioAnalyzer: React.FC<AudioAnalyzerProps> = ({ volumeLevel }) => {
+const AudioAnalyzer: React.FC<{ volumeLevel: number; isSessionActive: boolean }> = ({ volumeLevel, isSessionActive }) => {
   const [audioData, setAudioData] = useState<Uint8Array>(new Uint8Array(128));
 
   useEffect(() => {
+    if (!isSessionActive) {
+      setAudioData(new Uint8Array(128));
+      return;
+    }
+
     const updateAudioData = () => {
       const dataArray = new Uint8Array(128);
-      const baseValue = 128; // Base value to keep the line centered
 
       for (let i = 0; i < dataArray.length; i++) {
-        const variability = Math.random() * 0.2 + 0.9; // Add slight variability to the volume level
-        const newValue = baseValue + volumeLevel * variability * 127;
-        dataArray[i] = newValue;
+        const variability = (Math.random() - 0.5) * 0.5; // Reduced variability for less noise
+        dataArray[i] = Math.min(Math.max(128 + volumeLevel * variability * 128, 0), 255);
       }
       setAudioData(dataArray);
     };
@@ -76,33 +93,56 @@ const AudioAnalyzer: React.FC<AudioAnalyzerProps> = ({ volumeLevel }) => {
       updateAudioData();
       animationFrameId = requestAnimationFrame(tick);
     };
-    
+
     let animationFrameId = requestAnimationFrame(tick);
-    
+
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [volumeLevel]);
+  }, [volumeLevel, isSessionActive]);
 
-  return <AudioVisualizer audioData={audioData} />;
+  return <AudioVisualizer audioData={audioData} isSessionActive={isSessionActive} />;
 };
 
 const MinimalComponent: React.FC = () => {
   const { volumeLevel, isSessionActive, toggleCall } = useVapi();
+  const [showVisualizer, setShowVisualizer] = useState(false);
+
+  const handleToggleCall = () => {
+    toggleCall();
+    setShowVisualizer(!isSessionActive);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-full">
-      <div key="visualizer" className="flex items-center justify-center">
-        <button
+      <div className="flex items-center justify-center">
+        <motion.button
           key="callButton"
-          onClick={toggleCall}
-          className="px-4 rounded-md"
+          onClick={handleToggleCall}
+          className="p-2 rounded-xl bg-secondary"
+          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.1 }}
+          initial={{ x: 0 }}
+          animate={{ x: showVisualizer ? -40 : 0 }}
+          transition={{ duration: 0.3 }}
+          style={{ zIndex: 10, position: 'relative' }}
         >
           {isSessionActive ? <MicOff size={20} /> : <Mic size={20} />}
-        </button>
-        <div className="rounded-4xl p-4">
-          <AudioAnalyzer volumeLevel={volumeLevel} />
-        </div>
+        </motion.button>
+        <AnimatePresence>
+          {showVisualizer && (
+            <motion.div
+              className="rounded-4xl p-4 overflow-hidden"
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: '100%', opacity: 1 }}
+              exit={{ width: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              style={{ marginLeft: '10px' }}
+            >
+              <AudioAnalyzer volumeLevel={volumeLevel} isSessionActive={isSessionActive} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

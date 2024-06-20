@@ -13,7 +13,7 @@ export const Sidebar = () => {
   siteConfig.components.sort((a, b) => a.title.localeCompare(b.title));
 
   return (
-    <aside className="sticky top-[49px] gap-10 py-8 z-50 h-[calc(100dvh-98px)] w-full hidden md:block">
+    <aside className="sticky top-[49px] gap-10 py-8 z-50 h-[calc(100dvh-98px)] w-full hidden md:block overflow-auto">
       <ScrollArea className="h-full pr-6">
         <div className="flex flex-col gap-12 h-full">
           <div className="flex flex-col gap-1 items-start">

@@ -20,14 +20,14 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-4 container justify-center items-center">
       <Shine>
-        <section className="w-full h-full max-w-3xl container px-4 pt-24">
+        <section className="w-full h-full max-w-7xl container px-4 pt-24">
           <div className="flex flex-col justify-center space-y-4 text-center">
             <div className="space-y-12">
-              <span className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/50">
-               Instantly add Voice AI into your Next.js apps
+              <span className="text-7xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/50">
+              Effortlessly add Voice AI into your Apps with pre-built UI Components
               </span>
               <p className="w-full mt-4 px-10 md:text-xl lg:text-lg xl:text-xl text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/50">
-                Open source pre-built components & serverless functions to drop-in Voice AI into your web app - {"it's"} like if Shadcn & Vapi had a baby.
+              Beautiful components and serverless functions to drop into your web apps. <br/> Click orb below to get started.
               </p>
             </div>
             <div className="flex justify-center">
@@ -39,14 +39,14 @@ export default async function Home() {
               >
                 <Button
                   variant="outline"
-                  className="flex items-center gap-2 group"
+                  className="flex items-center group gap-2"
                 >
-                  View Components <ArrowRightIcon/>
+                  View Components <ArrowRightIcon size={12}/>
                 </Button>
               </a>
             </div>
-            <div className="w-full">
-            <Orb />
+            <div>
+              <Orb />
             </div>
           </div>
         </section>

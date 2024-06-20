@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Slider } from "@/components/ui/slider";
 import {
   Popover,
   PopoverContent,
@@ -23,18 +22,21 @@ const ConfigPopover: React.FC<ConfigPopoverProps> = ({ config, setConfig }) => {
     setTempConfig({ ...tempConfig, [id]: value });
   };
 
-  const handleSave = () => {
+  const handleSave = (section: string) => {
     setConfig(tempConfig);
-    console.log(tempConfig, null, 2);
+    console.log(`Saved ${section} settings:`, tempConfig);
   };
 
-  const renderPopoverContent = (title: string, content: JSX.Element) => (
+  const renderPopoverContent = (title: string, content: JSX.Element, section: string) => (
     <PopoverContent className="w-80">
       <div className="grid gap-4">
         <div className="space-y-2">
           <h4 className="font-medium leading-none">{title}</h4>
         </div>
         {content}
+        <Button type="button" onClick={() => handleSave(section)}>
+          Save changes
+        </Button>
       </div>
     </PopoverContent>
   );
@@ -90,7 +92,8 @@ const ConfigPopover: React.FC<ConfigPopoverProps> = ({ config, setConfig }) => {
                 />
               </div>
             </div>
-          </>
+          </>,
+          "Camera"
         )}
       </Popover>
 
@@ -134,7 +137,8 @@ const ConfigPopover: React.FC<ConfigPopoverProps> = ({ config, setConfig }) => {
                 />
               </div>
             </div>
-          </>
+          </>,
+          "Setup"
         )}
       </Popover>
 
@@ -198,7 +202,8 @@ const ConfigPopover: React.FC<ConfigPopoverProps> = ({ config, setConfig }) => {
                 />
               </div>
             </div>
-          </>
+          </>,
+          "RGB"
         )}
       </Popover>
 
@@ -240,13 +245,10 @@ const ConfigPopover: React.FC<ConfigPopoverProps> = ({ config, setConfig }) => {
                 />
               </div>
             </div>
-          </>
+          </>,
+          "Sphere"
         )}
       </Popover>
-
-      <Button type="button" onClick={handleSave}>
-        Save changes
-      </Button>
     </div>
   );
 };

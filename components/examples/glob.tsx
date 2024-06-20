@@ -37,7 +37,7 @@ const ParentComponent: React.FC = () => {
       if (isSessionActive) {
         setConfig(prevConfig => ({
           ...prevConfig,
-          perlinTime: 25.0,
+          perlinTime: 5.0,
           perlinMorph: 10.0,
         }));
       }
