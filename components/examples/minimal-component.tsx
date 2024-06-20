@@ -123,7 +123,7 @@ const MinimalComponent: React.FC = () => {
           whileTap={{ scale: 0.9 }}
           whileHover={{ scale: 1.1 }}
           initial={{ x: 0 }}
-          animate={{ x: showVisualizer ? -40 : 0 }}
+          animate={{ x: showVisualizer ? -10 : 0 }}
           transition={{ duration: 0.3 }}
           style={{ zIndex: 10, position: 'relative' }}
         >
@@ -132,7 +132,7 @@ const MinimalComponent: React.FC = () => {
         <AnimatePresence>
           {showVisualizer && (
             <motion.div
-              className="rounded-4xl p-4 overflow-hidden"
+              className="rounded-4xl"
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: '100%', opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}

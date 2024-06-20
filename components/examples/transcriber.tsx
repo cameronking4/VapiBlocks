@@ -60,7 +60,7 @@ function Transcriber({ conversation }: { conversation: Array<{ role: string; tex
       <div className="bg-secondary px-4 py-3 flex items-center justify-between dark:bg-secondary">
         <div className="font-medium text-foreground dark:text-foreground">Live Transcript</div>
       </div>
-      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 z-50">
         {conversation.map((message, index) => (
           <div key={index} className={`flex items-start gap-3 ${message.role === 'user' ? 'justify-end' : ''}`}>
             {message.role === 'assistant' && (

@@ -64,7 +64,7 @@ const Siri: React.FC<SiriProps> = ({ theme }) => {
           whileTap={{ scale: 0.9 }}
           whileHover={{ scale: 1.1 }}
           initial={{ x: 0 }}
-          animate={{ x: isSessionActive ? -40 : 0 }}
+          animate={{ x: isSessionActive ? -10 : 0 }}
           transition={{ duration: 0.3 }}
           style={{ zIndex: 10, position: 'relative' }}
         >
