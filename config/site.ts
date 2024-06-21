@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Vapi Blocks",
-  url: "https://vapiblocks.vercel.app",
+  url: "https://vapiblocks.com",
   description: "Vapi Blocks is a UI Library built with React and TailwindCSS to drop-in Voice AI components into your application with ease.",
   author: "cameronking4",
   links: {
