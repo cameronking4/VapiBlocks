@@ -9,7 +9,7 @@ export default function DocsPage() {
   }
 
   return (
-    <article className="prose dark:prose-invert flex flex-col justify-start items-start py-10 mdx min-w-0 max-w-full">
+    <article className="prose dark:prose-invert flex flex-col justify-start items-start py-10 mdx min-w-full max-w-full">
       <MDXContent code={introduction.body} />
     </article>
   );

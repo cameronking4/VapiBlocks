@@ -38,6 +38,21 @@ const components = defineCollection({
     .transform(computedFields),
 });
 
+const demos = defineCollection({
+  name: "demos",
+  pattern: "library/demos/**/*.mdx",
+  schema: s
+    .object({
+      slug: s.path(),
+      title: s.string().max(99),
+      description: s.string().max(999).optional(),
+      date: s.isodate(),
+      published: s.boolean().default(true),
+      body: s.mdx(),
+    })
+    .transform(computedFields),
+});
+
 export default defineConfig({
   root: "content",
   output: {
@@ -47,7 +62,7 @@ export default defineConfig({
     name: "[name]-[hash:6].[ext]",
     clean: true,
   },
-  collections: { docs, components },
+  collections: { docs, components, demos},
   mdx: {
     rehypePlugins: [
       rehypeSlug,

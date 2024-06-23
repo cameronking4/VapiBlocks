@@ -15,7 +15,7 @@ export const Sidebar = () => {
   return (
     <aside className="sticky top-[49px] gap-10 py-8 z-50 h-[calc(100dvh-98px)] w-full hidden md:block overflow-auto">
       <ScrollArea className="h-full pr-6">
-        <div className="flex flex-col gap-12 h-full">
+        <div className="flex flex-col gap-9 h-full">
           <div className="flex flex-col gap-1 items-start">
             <span className="scroll-m-20 text-sm font-medium tracking-tight">
              Components
@@ -68,6 +68,30 @@ export const Sidebar = () => {
               Non Voice-Reactive
             </span>
             {siteConfig.sections.map((component) => (
+              <Link
+                key={component.path}
+                href={component.path}
+                className="flex items-center gap-3"
+              >
+                <Button
+                  variant="link"
+                  size="lg"
+                  className={cn(
+                    "hover:no-underline text-muted-foreground hover:text-foreground px-0",
+                    pathname === `${component.path}` && "text-foreground"
+                  )}
+                >
+                  {component.title}
+                </Button>
+                {component.new && <Badge variant="outline">New</Badge>}
+              </Link>
+            ))}
+          </div>
+          <div className="flex flex-col gap-3 items-start">
+            <span className="scroll-m-20 text-sm font-medium tracking-tight">
+              Demos & Examples
+            </span>
+            {siteConfig.demos.map((component) => (
               <Link
                 key={component.path}
                 href={component.path}

@@ -10,7 +10,7 @@ export const siteConfig = {
   },
   docs: [
     {
-      title: "Introduction",
+      title: "Intro",
       path: "/docs",
       new: false,
     },
@@ -44,7 +44,7 @@ export const siteConfig = {
     {
       title: "Orb",
       path: "/components/3d-orb",
-      new: true,
+      new: false,
     },
     {
       title: "Glob",
@@ -76,6 +76,13 @@ export const siteConfig = {
     {
       title: "Outbound Call",
       path: "/components/outbound-phone-dial",
+      new: false,
+    }
+  ],
+  demos: [
+    {
+      title: "Assistant Builder",
+      path: "/components/demos/builder",
       new: true,
     }
   ],
