@@ -2,46 +2,45 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import axios from 'axios';
 
-const bearerToken = process.env.CAL_API_KEY;
+const apiKey = process.env.CAL_API_KEY;
 
 export async function POST(request: NextRequest) {
   try {
     const {
-      datetime,
-      eventTypeId,
-      title,
-      description,
-      timeZone,
-      language,
-      recurringEventId,
-      seatsPerTimeSlot,
-      seatsShowAttendees,
-      seatsShowAvailabilityCount,
+      start,
+      name,
+      email,
       smsReminderNumber
     } = await request.json();
 
-    const response = await axios.post('https://api.cal.com/v1/appointments', {
-      start_time: datetime,
-      end_time: new Date(new Date(datetime).getTime() + 30 * 60000).toISOString(),
-      title: title || "Scheduled Appointment",
-      eventTypeId: eventTypeId,
-      description: description || "",
-      timeZone: timeZone,
-      language: language || "en",
-      recurringEventId: recurringEventId || null,
-      seatsPerTimeSlot: seatsPerTimeSlot || 1,
-      seatsShowAttendees: seatsShowAttendees || false,
-      seatsShowAvailabilityCount: seatsShowAvailabilityCount || false,
-      smsReminderNumber: smsReminderNumber || null
-    }, {
-      headers: {
-        'Authorization': `Bearer ${bearerToken}`,
-        'Content-Type': 'application/json'
-      }
-    });
+    const startDateTime = new Date(start);
+    const endDateTime = new Date(startDateTime.getTime() + 30 * 60000); // Add 30 minutes to start time
+    const end = endDateTime.toISOString();
 
-    return NextResponse.json({ result: "The appointment was booked successfully.", response: response }, { status: 200 });
+    const response = await axios.post(
+      `https://api.cal.com/v1/bookings?apiKey=${apiKey}`,
+      {
+        eventTypeId: 873076,
+        start: start,
+        end: end,
+        responses: {
+          "name": name,
+          "email": email,
+          "metadata": {},
+          "location": "Google Meet"
+        },
+        timeZone: "America/Los_Angeles",
+        language: "en",
+        title: "30min Meeting with Cam (Founder of VapiBlocks)",
+        description: "Discuss partnership with VapiBlocks or ways to add Voice AI to your app",
+        status: "ACCEPTED",
+        smsReminderNumber: smsReminderNumber || null,
+        metadata: {}
+      }
+    );
+
+    return NextResponse.json({ result: "The booking was created successfully.", response: response.data }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ message: JSON.stringify(error) }, { status: 500 });
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }

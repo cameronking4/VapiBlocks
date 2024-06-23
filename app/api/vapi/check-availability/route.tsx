@@ -3,6 +3,8 @@ import type { NextRequest } from 'next/server';
 import axios from 'axios';
 
 const bearerToken = process.env.CAL_API_KEY;
+const username = process.env.CAL_USERNAME;
+const userId = process.env.CAL_USERID;
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,9 +13,11 @@ export async function POST(request: NextRequest) {
     const response = await axios.get('https://api.cal.com/v1/availability', {
       params: {
         apiKey: bearerToken,
-        userId: 'cameron-king',
+        userId: userId,
+        username: username,
         dateFrom: dateFrom,
-        dateTo: dateTo
+        dateTo: dateTo,
+        eventTypeId: '873076'
       }
       });
     console.log(response);
