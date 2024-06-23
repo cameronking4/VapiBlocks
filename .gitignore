@@ -38,4 +38,3 @@ next-env.d.ts
 
 # velite files
 .velite
-components/examples/scheduler.tsx
