@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import Script from 'next/script';
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -57,6 +58,11 @@ export default function RootLayout({
           <Analytics />
         </ThemeProvider>
       </body>
+      <Script
+        async
+        src="https://cloud.umami.is/script.js"
+        data-website-id="746564e6-6d18-4a7e-8059-b2a4a8493a40"
+       />
     </html>
   );
 }
