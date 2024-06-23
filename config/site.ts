@@ -81,7 +81,7 @@ export const siteConfig = {
   ],
   demos: [
     {
-      title: "Assistant Builder",
+      title: "Meeting Scheduler",
       path: "/components/demos/builder",
       new: true,
     }

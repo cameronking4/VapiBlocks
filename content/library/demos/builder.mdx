@@ -1,212 +1,187 @@
 ---
-title: Inception - Vapi Assistant Builder
-description: Use Vapi to configure Vapi
+title: Appointment Scheduler
+description: Book appointments and schedule meetings using Voice AI by connecting Cal.com to Vapi AI.
 date: 2024-03-04
 published: true
 ---
 
-# Vapi Assistant Builder
+# Appointment Scheduler
 
-This component creates an audio-reactive orb, configurable with ThreeJS. Click the Orb to start conversation with Vapi agent and as the audio streams, it will morph the ball. Click again to end the call and Vapi connection.
+This component takes advantage of function calling within Vapi assistants.
 
 ## Preview
 
-<ComponentPreview name="builder-demo" />{" "}
+<ComponentPreview name="scheduler" />{" "}
 
-## Code
+## Function Calling
 
-Copy the following code to your component file for example **_orb.tsx_**. Ensure you have Vapi hook setup.
+This example leverages Cal.com to check availability and book appointments (for free!). Using Cal.com will sync to Google & Outlook calendars.
 
+### checkAvailability
+Create a new route for direct use with your function named checkAvailability. Copy the following code to /api/vapi/check-availability/route.tsx
 <CodeBlockWrapper size="wrapper">
 ```tsx
-"use client";
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-import { createNoise3D } from 'simplex-noise';
-import useVapi from '@/hooks/use-vapi';
+import { NextRequest, NextResponse } from 'next/server';
+import axios from 'axios';
 
-const Orb: React.FC = () => {
-  const { volumeLevel, isSessionActive, toggleCall } = useVapi();
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
-  const sceneRef = useRef<THREE.Scene | null>(null);
-  const groupRef = useRef<THREE.Group | null>(null);
-  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
-  const ballRef = useRef<THREE.Mesh | null>(null);
-  const originalPositionsRef = useRef<any | null>(null);
-  const noise = createNoise3D();
+const bearerToken = process.env.CAL_API_KEY;
+const username = process.env.CAL_USERNAME;
+const userId = process.env.CAL_USERID;
 
-  useEffect(() => {
-    console.log("Initializing visualization...");
-    initViz();
-    window.addEventListener('resize', onWindowResize);
-    return () => {
-      window.removeEventListener('resize', onWindowResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isSessionActive && ballRef.current) {
-      console.log("Session is active, morphing the ball");
-      updateBallMorph(ballRef.current, volumeLevel);
-    } else if (!isSessionActive && ballRef.current && originalPositionsRef.current) {
-      console.log("Session ended, resetting the ball");
-      resetBallMorph(ballRef.current, originalPositionsRef.current);
+async function checkAvailability(parameters: { dateFrom: string; dateTo: string; }) {
+  const { dateFrom, dateTo } = parameters;
+  const response = await axios.get('https://api.cal.com/v1/availability', {
+    params: {
+      apiKey: bearerToken,
+      userId: userId,
+      username: username,
+      dateFrom: dateFrom,
+      dateTo: dateTo,
+      eventTypeId: '873076'
     }
-  }, [volumeLevel, isSessionActive]);
+  });
+  return response.data;
+}
 
-  const initViz = () => {
-    console.log("Initializing Three.js visualization...");
-    const scene = new THREE.Scene();
-    const group = new THREE.Group();
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.5, 100);
-    camera.position.set(0, 0, 100);
-    camera.lookAt(scene.position);
+export async function POST(request: NextRequest) {
+  console.log(request);
+  try {
+    const { message } = await request.json();
+    console.log(message);
+    if (message.type === 'function-call' && message.functionCall) {
+      const { parameters } = message.functionCall;
 
-    scene.add(camera);
-    sceneRef.current = scene;
-    groupRef.current = group;
-    cameraRef.current = camera;
-
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    rendererRef.current = renderer;
-
-    const icosahedronGeometry = new THREE.IcosahedronGeometry(10, 8);
-    const lambertMaterial = new THREE.MeshLambertMaterial({
-      color: 0xFFFFFF,
-      wireframe: true,
-    });
-
-    const ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
-    ball.position.set(0, 0, 0);
-    ballRef.current = ball;
-
-    // Store the original positions of the vertices
-    originalPositionsRef.current = ball.geometry.attributes.position.array.slice();
-
-    group.add(ball);
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
-
-    const spotLight = new THREE.SpotLight(0xffffff);
-    spotLight.intensity = 0.9;
-    spotLight.position.set(-10, 40, 20);
-    spotLight.lookAt(ball.position);
-    spotLight.castShadow = true;
-    scene.add(spotLight);
-
-    scene.add(group);
-
-    const outElement = document.getElementById('out');
-    if (outElement) {
-      outElement.innerHTML = ''; // Clear any existing renderer
-      outElement.appendChild(renderer.domElement);
-      renderer.setSize(outElement.clientWidth, outElement.clientHeight);
+      const result = await checkAvailability(parameters);
+      const response = NextResponse.json({ result }, { status: 200 });
+      response.headers.set('Access-Control-Allow-Origin', '*');
+      response.headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+      response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      return response;
+    } else {
+      const response = NextResponse.json({ message: `Unhandled message type: ${message.type}` }, { status: 400 });
+      response.headers.set('Access-Control-Allow-Origin', '*');
+      response.headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+      response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      return response;
     }
+  } catch (error) {
+    console.error('Error processing request:', error);
+    const response = NextResponse.json({ message: error }, { status: 500 });
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    return response;
+  }
+}
 
-    render();
-  };
+export async function OPTIONS() {
+  const response = NextResponse.json({}, { status: 200 });
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  return response;
+}
 
-  const render = () => {
-    if (!groupRef.current || !ballRef.current || !cameraRef.current || !rendererRef.current || !sceneRef.current) {
-      return;
-    }
-
-    groupRef.current.rotation.y += 0.005;
-    rendererRef.current.render(sceneRef.current, cameraRef.current);
-    requestAnimationFrame(render);
-  };
-
-  const onWindowResize = () => {
-    if (!cameraRef.current || !rendererRef.current) return;
-
-    const outElement = document.getElementById('out');
-    if (outElement) {
-      cameraRef.current.aspect = outElement.clientWidth / outElement.clientHeight;
-      cameraRef.current.updateProjectionMatrix();
-      rendererRef.current.setSize(outElement.clientWidth, outElement.clientHeight);
-    }
-  };
-
-  const updateBallMorph = (mesh: THREE.Mesh, volume: number) => {
-    console.log("Morphing the ball with volume:", volume);
-    const geometry = mesh.geometry as THREE.BufferGeometry;
-    const positionAttribute = geometry.getAttribute('position');
-
-    for (let i = 0; i < positionAttribute.count; i++) {
-      const vertex = new THREE.Vector3(
-        positionAttribute.getX(i),
-        positionAttribute.getY(i),
-        positionAttribute.getZ(i)
-      );
-
-      const offset = 10; // Radius of the icosahedron
-      const amp = 2.5; // Dramatic effect
-      const time = window.performance.now();
-      vertex.normalize();
-      const rf = 0.00001;
-      const distance =
-        offset +
-        volume * 4 + // Amplify volume effect
-        noise(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * volume;
-      vertex.multiplyScalar(distance);
-
-      positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
-    }
-
-    positionAttribute.needsUpdate = true;
-    geometry.computeVertexNormals();
-  };
-
-  const resetBallMorph = (mesh: THREE.Mesh, originalPositions: Float32Array) => {
-    console.log("Resetting the ball to its original shape");
-    const geometry = mesh.geometry as THREE.BufferGeometry;
-    const positionAttribute = geometry.getAttribute('position');
-
-    for (let i = 0; i < positionAttribute.count; i++) {
-      positionAttribute.setXYZ(
-        i,
-        originalPositions[i * 3],
-        originalPositions[i * 3 + 1],
-        originalPositions[i * 3 + 2]
-      );
-    }
-
-    positionAttribute.needsUpdate = true;
-    geometry.computeVertexNormals();
-  };
-
-  return (
-    <div style={{ height: '100%' }}>
-      <div id="out" className="hover:cursor-pointer" onClick={toggleCall} style={{ height: '100%', width: '100%' }}></div>
-    </div>
-  );
-};
-
-export default Orb;
 
 ````
 </CodeBlockWrapper>
 
+**Example Payload**:
+```
+{
+    "dateTo": "2024-08-01T06:06:13.371Z",
+    "dateFrom": "2024-07-29T06:06:14.371Z"
+}
+```
 
-## Usage
-
-Import the component in your file and then use it in your page.
-
-**_Note:_** This component uses Tailwind CSS, make sure to have it installed in your project.
-
+### bookAppointment
+Copy to api/vapi/book-appointment/route.tsx
 <CodeBlockWrapper size="full">
 ```tsx {1,6}
-import Orb from "@/components/vapi/orb";
+import { NextRequest, NextResponse } from 'next/server';
+import axios from 'axios';
 
-export default function Home() {
-  return (
-    <main className="flex items-center justify-center h-screen">
-      <Orb />
-    </main>
+const apiKey = process.env.CAL_API_KEY;
+
+async function createBooking({ start, name, email, smsReminderNumber }: { start: string; name: string; email: string; smsReminderNumber?: string }) {
+  const startDateTime = new Date(start);
+  const endDateTime = new Date(startDateTime.getTime() + 30 * 60000); // Add 30 minutes to start time
+  const end = endDateTime.toISOString();
+
+  const response = await axios.post(
+    `https://api.cal.com/v1/bookings?apiKey=${apiKey}`,
+    {
+      eventTypeId: 873076,
+      start: start,
+      end: end,
+      responses: {
+        name: name,
+        email: email,
+        metadata: {},
+        location: "Google Meet"
+      },
+      timeZone: "America/Los_Angeles",
+      language: "en",
+      title: "30min Meeting with Cam (Founder of VapiBlocks)",
+      description: "Discuss partnership with VapiBlocks or ways to add Voice AI to your app",
+      status: "ACCEPTED",
+      smsReminderNumber: smsReminderNumber || null,
+      metadata: {}
+    }
   );
+
+  return response.data;
 }
+
+export async function POST(request: NextRequest) {
+  try {
+    const { message } = await request.json();
+    console.log(message);
+    if (message.type === 'function-call' && message.functionCall) {
+      const { parameters } = message.functionCall;
+      
+      const result = await createBooking(parameters);
+      const jsonResponse = NextResponse.json({ result: "The booking was created successfully.", response: result }, { status: 200 });
+      jsonResponse.headers.set('Access-Control-Allow-Origin', '*');
+      jsonResponse.headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+      jsonResponse.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      return jsonResponse;
+    } else {
+      const jsonResponse = NextResponse.json({ message: `Unhandled message type: ${message.type}` }, { status: 400 });
+      jsonResponse.headers.set('Access-Control-Allow-Origin', '*');
+      jsonResponse.headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+      jsonResponse.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      return jsonResponse;
+    }
+  } catch (error) {
+    console.error('Error processing request:', error);
+    const jsonResponse = NextResponse.json({ message: error }, { status: 500 });
+    jsonResponse.headers.set('Access-Control-Allow-Origin', '*');
+    jsonResponse.headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    jsonResponse.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    return jsonResponse;
+  }
+}
+
+export async function OPTIONS() {
+  const response = NextResponse.json({}, { status: 200 });
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  return response;
+}
+
 ````
 
 </CodeBlockWrapper>
+
+***Example Payload***
+
+```
+{
+  "start": "2024-09-29T18:00:00.000Z",
+  "name": "John Doe",
+  "email": "john@vapiblocks.com",
+  "smsReminderNumber": ""
+}
+```

@@ -49,7 +49,37 @@ const useVapiAssistant = () => {
         .catch(error => {
           console.error('Error creating Vapi config:', error);
         });
-    } else if (message.type === 'transcript' && message.transcript) {
+      
+    }
+    if (message.type === 'function-call' && message.functionCall?.name === 'createVapiConfig') {
+      console.log("function called: ", JSON.stringify(message, null, 2))
+      fetch('/api/create-vapi-config', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(message.functionCall.parameters)
+      })
+        .then(response => response.json())
+        .catch(error => {
+          console.error('Error creating Vapi config:', error);
+        });
+    }
+    if (message.type === 'function-call' && message.functionCall?.name === 'createVapiConfig') {
+      console.log("function called: ", JSON.stringify(message, null, 2))
+      fetch('/api/create-vapi-config', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(message.functionCall.parameters)
+      })
+        .then(response => response.json())
+        .catch(error => {
+          console.error('Error creating Vapi config:', error);
+        });
+    }
+    if (message.type === 'transcript' && message.transcript) {
       if (message.transcript.text) {
         setTranscription(prev => prev + ' ' + message.transcript?.text);
       } else {
