@@ -23,7 +23,7 @@ export function MobileNav() {
   siteConfig.components.sort((a, b) => a.title.localeCompare(b.title));
 
   return (
-    <div className="md:hidden flex gap-10 w-full items-center">
+    <div className="md:hidden flex gap-2 w-full items-center overflow-auto">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button size="icon" variant="outline" aria-label="Open navigation">
@@ -32,7 +32,7 @@ export function MobileNav() {
         </SheetTrigger>
         <SheetContent
           side="left"
-          className="h-dvh w-1/2 rounded-none flex flex-col flex-1 justify-start items-start border-none"
+          className="h-screen w-1/2 rounded-none flex flex-col flex-1 justify-start items-start border-none overflow-scroll"
         >
           <SheetHeader className="w-full">
             <SheetTitle className="w-full text-center">
@@ -42,13 +42,13 @@ export function MobileNav() {
                 className="flex items-center gap-3 justify-center"
               >
                 {siteConfig.name}
-                <Badge variant="outline" className="text-normal">
+                {/* <Badge variant="outline" className="text-normal">
                   Beta
-                </Badge>
+                </Badge> */}
               </Link>
             </SheetTitle>
-            <ScrollArea className="flex flex-col gap-3">
-              <div className="flex flex-col gap-16 items-start mt-5">
+            <ScrollArea className="flex flex-col gap-3 overflow-scroll">
+              <div className="flex flex-col gap-4 items-start mt-5">
                 <div className="flex flex-col gap-5 items-start">
                   <span className="scroll-m-20 text-sm font-medium tracking-tight">
                     Getting Started
@@ -75,7 +75,7 @@ export function MobileNav() {
                 </div>
                 <div className="flex flex-col gap-5 items-start">
                   <span className="scroll-m-20 text-sm font-medium tracking-tight">
-                    Components
+                    Voice Reactive
                   </span>
                   {siteConfig.components.map((component) => (
                     <Link
@@ -100,7 +100,7 @@ export function MobileNav() {
                 </div>
                 <div className="flex flex-col gap-5 items-start">
                   <span className="scroll-m-20 text-sm font-medium tracking-tight">
-                    Sections
+                    Non Voice Reactive
                   </span>
                   {siteConfig.sections.map((component) => (
                     <Link
@@ -123,6 +123,30 @@ export function MobileNav() {
                     </Link>
                   ))}
                 </div>
+                <div className="flex flex-col gap-3 items-start">
+                <span className="scroll-m-20 text-sm font-medium tracking-tight">
+                  Demos & Examples
+                </span>
+                {siteConfig.demos.map((component) => (
+                  <Link
+                    key={component.path}
+                    href={component.path}
+                    className="flex items-center gap-3"
+                  >
+                    <Button
+                      variant="link"
+                      size="lg"
+                      className={cn(
+                        "hover:no-underline text-muted-foreground hover:text-foreground px-0",
+                        pathname === `${component.path}` && "text-foreground"
+                      )}
+                    >
+                      {component.title}
+                    </Button>
+                    {component.new && <Badge variant="outline">New</Badge>}
+                  </Link>
+                ))}
+              </div>
               </div>
             </ScrollArea>
           </SheetHeader>

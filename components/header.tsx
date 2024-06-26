@@ -30,28 +30,28 @@ export function Header() {
           </Link>
           <div className="flex gap-10 items-center">
             {/* <Link href={newComponent.path}> */}
-            <Link href="/docs/changelog" >
+            <Link href="/docs/intro" >
               <Button
                 variant="link"
                 size="sm"
                 className={cn(
                   "hover:no-underline text-muted-foreground hover:text-foreground",
-                  pathname.includes("components") && "text-foreground"
+                  pathname.includes("components") && !pathname.includes("demos") && "text-foreground"
                 )}
               >
                 Components
               </Button>
             </Link>
-            <Link href="/docs">
+            <Link href="/components/demos/builder">
               <Button
                 variant="link"
                 size="sm"
                 className={cn(
                   "hover:no-underline text-muted-foreground hover:text-foreground",
-                  pathname.includes("functions") && "text-foreground"
+                  pathname.includes("demos") && "text-foreground"
                 )}
               >
-                Functions
+                Examples
               </Button>
             </Link>
           </div>
