@@ -15,7 +15,7 @@ const routes: { [key: string]: string } = {
 const useVapi = () => {
   const [volumeLevel, setVolumeLevel] = useState(0);
   const [isSessionActive, setIsSessionActive] = useState(false);
-  const [code, setCode] = useState(`console.log('Hello, world!');`); // Default code
+  const [code, setCode] = useState(""); // Default code
   const [conversation, setConversation] = useState<
     { role: string; text: string; timestamp: string; isFinal: boolean }[]
   >([]);

@@ -30,7 +30,7 @@ export function Header() {
           </Link>
           <div className="flex gap-10 items-center">
             {/* <Link href={newComponent.path}> */}
-            <Link href="/docs/intro" >
+            <Link href="/components/outbound-phone-dial" >
               <Button
                 variant="link"
                 size="sm"

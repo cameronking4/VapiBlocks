@@ -52,11 +52,11 @@ const Visualizer: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 rounded-xl shadow-md">
+    <div className="flex flex-col items-center justify-center p-6 rounded">
       <AnimatePresence>
         {isSessionActive && (
           <motion.div
-            className="flex items-center justify-center w-full h-32"
+            className="flex items-center justify-center w-full h-full"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}

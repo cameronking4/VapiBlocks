@@ -31,8 +31,8 @@ export function MobileNav() {
           </Button>
         </SheetTrigger>
         <SheetContent
-          side="left"
-          className="h-screen w-1/2 rounded-none flex flex-col flex-1 justify-start items-start border-none overflow-scroll"
+          side="top"
+          className="h-screen w-full rounded-none flex flex-col flex-1 justify-start items-start border-none overflow-y-auto"
         >
           <SheetHeader className="w-full">
             <SheetTitle className="w-full text-center">
@@ -62,7 +62,7 @@ export function MobileNav() {
                     >
                       <Button
                         variant="link"
-                        size="sm"
+                        size="lg"
                         className={cn(
                           "hover:no-underline text-muted-foreground hover:text-foreground px-0",
                           pathname === `${doc.path}` && "text-foreground"
@@ -86,7 +86,7 @@ export function MobileNav() {
                     >
                       <Button
                         variant="link"
-                        size="sm"
+                        size="lg"
                         className={cn(
                           "hover:no-underline text-muted-foreground hover:text-foreground px-0",
                           pathname === `${component.path}` && "text-foreground"
@@ -111,7 +111,7 @@ export function MobileNav() {
                     >
                       <Button
                         variant="link"
-                        size="sm"
+                        size="lg"
                         className={cn(
                           "hover:no-underline text-muted-foreground hover:text-foreground px-0",
                           pathname === `${component.path}` && "text-foreground"
