@@ -1,7 +1,5 @@
 # Vapi Blocks - React components library
-
-![image](https://github.com/cameronking4/VapiBlocks/assets/35708477/fa06bd54-c3c5-4e3e-bec4-8cd7b2d25354)
-
+https://github.com/cameronking4/VapiBlocks/assets/35708477/a120c7b5-4fcc-4d71-baf0-e4763330e72d
 
 ## Introduction
 
