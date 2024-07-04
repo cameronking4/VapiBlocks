@@ -1,4 +1,4 @@
-# Vapi Blocks - React components library
+# Vapi Blocks - animated components & api snippets for Vapi AI
 
 ## Intro
 
