@@ -1,9 +1,11 @@
 # Vapi Blocks - React components library
-https://github.com/cameronking4/VapiBlocks/assets/35708477/a120c7b5-4fcc-4d71-baf0-e4763330e72d
 
-## Introduction
+## Intro
 
 Vapi Blocks is a collection of components and styles that can be used to build web applications. It is designed to be simple and easy to integrate into your **ReactJS** and **NextJS** projects.
+
+[![VapiBlocks UI Library & API Snips for Vapi Voice AI](https://res.cloudinary.com/marcomontalbano/image/upload/v1720129151/video_to_markdown/images/youtube--gjtUfjiRgAs-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=gjtUfjiRgAs "VapiBlocks UI Library & API Snips for Vapi Voice AI")
+
 
 ## Features
 
