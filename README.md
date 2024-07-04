@@ -17,9 +17,27 @@ Vapi Blocks is a collection of components and styles that can be used to build w
 
 - **Open Source**: Vapi Blocks is open source. You can use it for free in your personal and commercial projects and contribute to its development.
 
+## Voice & Mic Reactive Components [view here](https://vapiblocks.com)
+
+- **Siri**
+- **Classic**
+- **Orb**
+- **Glob**
+- **Minimal**
+- **Floaty**
+
+## Snippets & Examples
+
+- **Meeting Scheduler**: [view here](https://vapiblocks.com)
+- **Outbound Phone Call from Web**: [view here](https://vapiblocks.com](https://www.vapiblocks.com/components/outbound-phone-dial))
+- **SMS Examples**: Coming soon.
+- **Coding Assistant**: [view here](https://www.vapiblocks.com/components/demos/builder)
+- **Tavily AI Web Search**: In progress.
+- **Data Retrieval**: Coming soon.
+
 ## Installation
 
-You only need to install the dependencies and import the components that you want to use in your project.
+You only need to install the dependencies and import the components that you want to use in your project. Sopecific components may require installation of framer-motion.
 
 Dependencies:
 
