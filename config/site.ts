@@ -52,6 +52,11 @@ export const siteConfig = {
       new: true,
     },
     {
+      title: "Dynamic Island",
+      path: "/components/dynamic-island",
+      new: true,
+    },
+    {
       title: "Radial",
       path: "/components/circlewaveform",
       new: false,
@@ -82,7 +87,12 @@ export const siteConfig = {
   demos: [
     {
       title: "Meeting Scheduler",
-      path: "/components/demos/builder",
+      path: "/components/demos/meeting",
+      new: true,
+    },
+    {
+      title: "Coding Assistant",
+      path: "/components/demos/coder",
       new: true,
     }
   ],

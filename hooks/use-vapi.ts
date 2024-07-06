@@ -4,17 +4,10 @@ import Vapi from '@vapi-ai/web';
 const publicKey = process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY || ""; // Replace with your actual public key
 const assistantId = process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID || ""; // Replace with your actual assistant ID
 
-const routes: { [key: string]: string } = {
-  "visualizer": "/components/visualizer",
-  "orb": "/components/orb",
-  "radial": "/components/radial",
-  "siri": "/components/siri"
-};
-
-
 const useVapi = () => {
   const [volumeLevel, setVolumeLevel] = useState(0);
   const [isSessionActive, setIsSessionActive] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
   const [conversation, setConversation] = useState<
     { role: string; text: string; timestamp: string; isFinal: boolean }[]
   >([]);
@@ -128,7 +121,30 @@ const useVapi = () => {
     }
   };
 
-  return { volumeLevel, isSessionActive, conversation, toggleCall };
+  const sendMessage = (role: string, content: string) => {
+    if (vapiRef.current) {
+      vapiRef.current.send({
+        type: 'add-message',
+        message: { role, content },
+      });
+    }
+  };
+
+  const say = (message: string, endCallAfterSpoken = false) => {
+    if (vapiRef.current) {
+      vapiRef.current.say(message, endCallAfterSpoken);
+    }
+  };
+
+  const toggleMute = () => {
+    if (vapiRef.current) {
+      const newMuteState = !isMuted;
+      vapiRef.current.setMuted(newMuteState);
+      setIsMuted(newMuteState);
+    }
+  };
+
+  return { volumeLevel, isSessionActive, conversation, toggleCall, sendMessage, say, toggleMute, isMuted };
 };
 
 export default useVapi;

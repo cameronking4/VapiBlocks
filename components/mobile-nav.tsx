@@ -31,15 +31,15 @@ export function MobileNav() {
           </Button>
         </SheetTrigger>
         <SheetContent
-          side="top"
-          className="h-screen w-full rounded-none flex flex-col flex-1 justify-start items-start border-none overflow-y-auto"
+          side="left"
+          className="h-screen w-full rounded-none flex flex-col flex-1 justify-start items-start border-none overflow-y-auto p-6"
         >
           <SheetHeader className="w-full">
-            <SheetTitle className="w-full text-center">
+            <SheetTitle className="w-full text-left text-2xl font-bold">
               <Link
                 href="/"
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-3 justify-center"
+                className="flex items-center gap-3"
               >
                 {siteConfig.name}
                 {/* <Badge variant="outline" className="text-normal">
@@ -47,10 +47,10 @@ export function MobileNav() {
                 </Badge> */}
               </Link>
             </SheetTitle>
-            <ScrollArea className="flex flex-col gap-3 overflow-scroll">
-              <div className="flex flex-col gap-4 items-start mt-5">
-                <div className="flex flex-col gap-5 items-start">
-                  <span className="scroll-m-20 text-sm font-medium tracking-tight">
+            <ScrollArea className="flex flex-col gap-6 overflow-scroll mt-6">
+              <div className="flex flex-col gap-8 items-start">
+                <div className="flex flex-col gap-6 items-start mt-4">
+                  <span className="scroll-m-20 text-xl font-medium tracking-tight">
                     Getting Started
                   </span>
                   {siteConfig.docs.map((doc) => (
@@ -64,7 +64,7 @@ export function MobileNav() {
                         variant="link"
                         size="lg"
                         className={cn(
-                          "hover:no-underline text-muted-foreground hover:text-foreground px-0",
+                          "hover:no-underline text-muted-foreground hover:text-foreground px-0 text-lg",
                           pathname === `${doc.path}` && "text-foreground"
                         )}
                       >
@@ -73,9 +73,9 @@ export function MobileNav() {
                     </Link>
                   ))}
                 </div>
-                <div className="flex flex-col gap-5 items-start">
-                  <span className="scroll-m-20 text-sm font-medium tracking-tight">
-                    Voice Reactive
+                <div className="flex flex-col gap-6 items-start">
+                  <span className="scroll-m-20 text-xl font-medium tracking-tight">
+                    Voice Animated Components
                   </span>
                   {siteConfig.components.map((component) => (
                     <Link
@@ -88,7 +88,7 @@ export function MobileNav() {
                         variant="link"
                         size="lg"
                         className={cn(
-                          "hover:no-underline text-muted-foreground hover:text-foreground px-0",
+                          "hover:no-underline text-muted-foreground hover:text-foreground px-0 text-lg",
                           pathname === `${component.path}` && "text-foreground"
                         )}
                       >
@@ -98,9 +98,9 @@ export function MobileNav() {
                     </Link>
                   ))}
                 </div>
-                <div className="flex flex-col gap-5 items-start">
-                  <span className="scroll-m-20 text-sm font-medium tracking-tight">
-                    Non Voice Reactive
+                <div className="flex flex-col gap-6 items-start">
+                  <span className="scroll-m-20 text-xl font-medium tracking-tight">
+                    Non-Voice Animated Components
                   </span>
                   {siteConfig.sections.map((component) => (
                     <Link
@@ -113,7 +113,7 @@ export function MobileNav() {
                         variant="link"
                         size="lg"
                         className={cn(
-                          "hover:no-underline text-muted-foreground hover:text-foreground px-0",
+                          "hover:no-underline text-muted-foreground hover:text-foreground px-0 text-lg",
                           pathname === `${component.path}` && "text-foreground"
                         )}
                       >
@@ -123,30 +123,31 @@ export function MobileNav() {
                     </Link>
                   ))}
                 </div>
-                <div className="flex flex-col gap-3 items-start">
-                <span className="scroll-m-20 text-sm font-medium tracking-tight">
-                  Demos & Examples
-                </span>
-                {siteConfig.demos.map((component) => (
-                  <Link
-                    key={component.path}
-                    href={component.path}
-                    className="flex items-center gap-3"
-                  >
-                    <Button
-                      variant="link"
-                      size="lg"
-                      className={cn(
-                        "hover:no-underline text-muted-foreground hover:text-foreground px-0",
-                        pathname === `${component.path}` && "text-foreground"
-                      )}
+                <div className="flex flex-col gap-6 items-start">
+                  <span className="scroll-m-20 text-xl font-medium tracking-tight">
+                    Demos & Examples
+                  </span>
+                  {siteConfig.demos.map((component) => (
+                    <Link
+                      key={component.path}
+                      href={component.path}
+                      className="flex items-center gap-3"
+                      onClick={() => setOpen(false)}
                     >
-                      {component.title}
-                    </Button>
-                    {component.new && <Badge variant="outline">New</Badge>}
-                  </Link>
-                ))}
-              </div>
+                      <Button
+                        variant="link"
+                        size="lg"
+                        className={cn(
+                          "hover:no-underline text-muted-foreground hover:text-foreground px-0 text-lg",
+                          pathname === `${component.path}` && "text-foreground"
+                        )}
+                      >
+                        {component.title}
+                      </Button>
+                      {component.new && <Badge variant="outline">New</Badge>}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </ScrollArea>
           </SheetHeader>

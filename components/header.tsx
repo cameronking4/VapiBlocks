@@ -42,7 +42,7 @@ export function Header() {
                 Components
               </Button>
             </Link>
-            <Link href="/components/demos/builder">
+            <Link href="/components/demos/meeting">
               <Button
                 variant="link"
                 size="sm"
