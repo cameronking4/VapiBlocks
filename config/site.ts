@@ -15,15 +15,15 @@ export const siteConfig = {
       new: false,
     },
     // {
-    //   title: "Installation",
+    //   title: "Getting started",
     //   path: "/docs/creating-a-new-project",
     //   new: false,
     // },
-    // {
-    //   title: "Changelog",
-    //   path: "/docs/changelog",
-    //   new: false,
-    // },
+    {
+      title: "Quickstart",
+      path: "/docs/quickstart",
+      new: true,
+    },
   ],
   components: [
     {

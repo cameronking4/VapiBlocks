@@ -13,7 +13,7 @@ export const Sidebar = () => {
   siteConfig.components.sort((a, b) => a.title.localeCompare(b.title));
 
   return (
-    <aside className="sticky top-[49px] gap-10 py-8 z-50 h-[calc(100dvh-5px)] w-full hidden md:block overflow-auto">
+    <aside className="sticky top-[49px] gap-10 py-8 z-20 h-[calc(100dvh-25px)] w-full hidden md:block overflow-auto">
       <ScrollArea className="h-full pr-6">
         <div className="flex flex-col gap-9 h-full">
           <div className="flex flex-col gap-1 items-start">
@@ -39,7 +39,7 @@ export const Sidebar = () => {
               </Link>
             ))}
           </div>
-          <div className="flex flex-col gap-2 items-start">
+          <div className="flex flex-col gap-1 items-start">
             <span className="scroll-m-20 text-sm font-medium tracking-tight">
               Voice-Reactive
             </span>
@@ -47,7 +47,7 @@ export const Sidebar = () => {
               <Link
                 key={component.path}
                 href={component.path}
-                className="flex items-center gap-3"
+                className="flex items-center gap-1"
               >
                 <Button
                   variant="link"
@@ -63,7 +63,7 @@ export const Sidebar = () => {
               </Link>
             ))}
           </div>
-          <div className="flex flex-col gap-3 items-start">
+          <div className="flex flex-col gap-1 items-start">
             <span className="scroll-m-20 text-sm font-medium tracking-tight">
               Non Voice-Reactive
             </span>
@@ -71,7 +71,7 @@ export const Sidebar = () => {
               <Link
                 key={component.path}
                 href={component.path}
-                className="flex items-center gap-3"
+                className="flex items-center gap-1"
               >
                 <Button
                   variant="link"
@@ -87,7 +87,7 @@ export const Sidebar = () => {
               </Link>
             ))}
           </div>
-          <div className="flex flex-col gap-3 items-start">
+          <div className="flex flex-col gap-1 items-start">
             <span className="scroll-m-20 text-sm font-medium tracking-tight">
               Demos & Examples
             </span>
@@ -95,7 +95,7 @@ export const Sidebar = () => {
               <Link
                 key={component.path}
                 href={component.path}
-                className="flex items-center gap-3"
+                className="flex items-center gap-1"
               >
                 <Button
                   variant="link"
