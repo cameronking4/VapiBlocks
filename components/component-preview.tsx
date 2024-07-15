@@ -9,48 +9,47 @@ interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: "center" | "start" | "end";
   description?: string;
 }
-
 export function ComponentPreview({
-  name,
-  align = "center",
-  description,
-  ...props
+	name,
+	align = "center",
+	description,
+	...props
 }: ComponentPreviewProps) {
-  const [forceUpdate, setForceUpdate] = useState(false);
-  const [key, setKey] = useState(0);
+	const [forceUpdate, setForceUpdate] = useState(false);
+	const [key, setKey] = useState(0);
 
-  const LoadComponent = () => {
-    const LazyComponent = React.useMemo(() => {
-      return React.lazy(() => import(`@/components/examples/${name}`));
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [forceUpdate]);
+	const LoadComponent = () => {
+		const LazyComponent = React.useMemo(() => {
+			return React.lazy(() => import(`@/components/examples/${name}`));
+		}, [forceUpdate]);
 
-    return LazyComponent;
-  };
+		return LazyComponent;
+	};
 
-  const reloadComponent = () => {
-    setKey((prevKey) => prevKey + 1);
-  };
+	const reloadComponent = () => {
+		setKey((prevKey) => prevKey + 1);
+	};
 
-  const LazyComponent = LoadComponent();
-  return (
-    <div
-      className={cn(
-        "relative bg-transparent border rounded-[1rem] w-full min-h-[250px] flex justify-center items-center overflow-hidden p-4"
-      )}
-      {...props}
-    >
-      <Suspense fallback={<div></div>}>
-        <LazyComponent key={key} />
-      </Suspense>
-      <Button
-        size="icon"
-        variant="ghost"
-        className="text-white absolute top-2 right-2"
-        onClick={reloadComponent}
-      >
-        <ReloadIcon />
-      </Button>
-    </div>
-  );
+	const LazyComponent = LoadComponent();
+
+	return (
+		<div
+			className={cn(
+				"relative bg-transparent border rounded-[1rem] w-full min-h-[250px] flex justify-center items-center overflow-hidden p-2"
+			)}
+			{...props}
+		>
+			<Suspense fallback={<div></div>}>
+				<LazyComponent key={key} />
+			</Suspense>
+			<Button
+				size="icon"
+				variant="ghost"
+				className="text-white absolute top-2 right-2"
+				onClick={reloadComponent}
+			>
+				<ReloadIcon />
+			</Button>
+		</div>
+	);
 }
