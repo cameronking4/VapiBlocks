@@ -15,10 +15,10 @@ export const Sidebar = () => {
   return (
     <aside className="sticky top-[49px] gap-10 py-8 z-20 h-[calc(100dvh-25px)] w-full hidden md:block overflow-auto">
       <ScrollArea className="h-full pr-6">
-        <div className="flex flex-col gap-9 h-full">
+        <div className="flex flex-col gap-5 h-full">
           <div className="flex flex-col gap-1 items-start">
             <span className="scroll-m-20 text-sm font-medium tracking-tight">
-             Components
+             Docs
             </span>
             {siteConfig.docs.map((doc) => (
               <Link
@@ -41,7 +41,7 @@ export const Sidebar = () => {
           </div>
           <div className="flex flex-col gap-1 items-start">
             <span className="scroll-m-20 text-sm font-medium tracking-tight">
-              Voice-Reactive
+              Animated Components
             </span>
             {siteConfig.components.map((component) => (
               <Link
@@ -65,7 +65,7 @@ export const Sidebar = () => {
           </div>
           <div className="flex flex-col gap-1 items-start">
             <span className="scroll-m-20 text-sm font-medium tracking-tight">
-              Non Voice-Reactive
+              Standard Components
             </span>
             {siteConfig.sections.map((component) => (
               <Link
@@ -89,7 +89,7 @@ export const Sidebar = () => {
           </div>
           <div className="flex flex-col gap-1 items-start">
             <span className="scroll-m-20 text-sm font-medium tracking-tight">
-              Demos & Examples
+              Blocks / Cookbook
             </span>
             {siteConfig.demos.map((component) => (
               <Link

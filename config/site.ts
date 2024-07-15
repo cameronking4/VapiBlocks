@@ -14,15 +14,15 @@ export const siteConfig = {
       path: "/docs",
       new: false,
     },
-    // {
-    //   title: "Getting started",
-    //   path: "/docs/creating-a-new-project",
-    //   new: false,
-    // },
     {
       title: "Quickstart",
       path: "/docs/quickstart",
-      new: true,
+      new: false,
+    },
+    {
+      title: "Templates",
+      path: "/docs/templates",
+      new: false,
     },
   ],
   components: [

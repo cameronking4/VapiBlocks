@@ -51,7 +51,19 @@ export function Header() {
                   pathname.includes("demos") && "text-foreground"
                 )}
               >
-                Examples
+                Blocks
+              </Button>
+            </Link>
+            <Link href="/docs/templates">
+              <Button
+                variant="link"
+                size="sm"
+                className={cn(
+                  "hover:no-underline text-muted-foreground hover:text-foreground",
+                  pathname.includes("demos") && "text-foreground"
+                )}
+              >
+                Templates
               </Button>
             </Link>
           </div>

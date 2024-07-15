@@ -32,14 +32,14 @@ export function MobileNav() {
         </SheetTrigger>
         <SheetContent
           side="left"
-          className="h-screen w-full rounded-none flex flex-col flex-1 justify-start items-start border-none overflow-y-auto p-6"
+          className="h-screen w-full rounded-none flex flex-col flex-1 justify-start items-start border-none overflow-y-auto p-6 pb-48"
         >
           <SheetHeader className="w-full">
             <SheetTitle className="w-full text-left text-2xl font-bold">
               <Link
                 href="/"
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-3"
+                className="flex items-center gap-3 text-2xl"
               >
                 {siteConfig.name}
                 {/* <Badge variant="outline" className="text-normal">
