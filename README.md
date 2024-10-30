@@ -1,8 +1,8 @@
-# Vapi Blocks - animated components & api snippets for Vapi AI
+# Vapi Blocks -  Vapi AI
 
 ## Intro
 
-Vapi Blocks is a collection of components and styles that can be used to build web applications. It is designed to be simple and easy to integrate into your **ReactJS** and **NextJS** projects.
+Vapi Blocks is a collection of animated components & api snippets to integrate Vapi AI into your Next.js app. 
 
 [![VapiBlocks UI Library & API Snips for Vapi Voice AI](https://res.cloudinary.com/marcomontalbano/image/upload/v1720129151/video_to_markdown/images/youtube--gjtUfjiRgAs-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=gjtUfjiRgAs "VapiBlocks UI Library & API Snips for Vapi Voice AI")
 
