@@ -1,9 +1,7 @@
-# Vapi Blocks -  Vapi AI
+# Vapi Blocks -  UI Library for Vapi AI
+Vapi Blocks is a collection of animated components & api snippets to integrate Vapi AI into your Next.js app. Copy and paste the components and hooks to get started.
 
 ## Intro
-
-Vapi Blocks is a collection of animated components & api snippets to integrate Vapi AI into your Next.js app. 
-
 [![VapiBlocks UI Library & API Snips for Vapi Voice AI](https://res.cloudinary.com/marcomontalbano/image/upload/v1720129151/video_to_markdown/images/youtube--gjtUfjiRgAs-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=gjtUfjiRgAs "VapiBlocks UI Library & API Snips for Vapi Voice AI")
 
 ## CustomGPT Helper in ChatGPT
@@ -25,7 +23,7 @@ Use the [VapiBlocks GPT](https://chatgpt.com/g/g-VcpINtsho-vapiblocks-cookbook-f
 - **Classic**
 - **Orb**
 - **Glob**
-- **Minimal**
+Ω- **Minimal**
 - **Floaty**
 
 ## Snippets & Examples
